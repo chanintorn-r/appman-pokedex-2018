@@ -1,6 +1,36 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import * as R from 'ramda'
 import App from './App'
+import { StateProvider } from './state'
+import './index.css'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const initialState = {
+  isOpenModal: true,
+  pokedex: [],
+}
+
+const reducer = (state, { type, payload }) => {
+  switch (type) {
+    case 'toggleModal':
+      return {
+        ...state,
+        isOpenModal: !state.isOpenModal
+      }
+    case 'addPokemon':
+      return {
+        ...state,
+        pokedex: [...state.pokedex, payload]
+      }
+    case 'removePokemon':
+      return {
+        ...state,
+        pokedex: R.filter((item) => item.id !== payload.id, state.pokedex),
+      }
+    default:
+      return state
+  }
+}
+
+
+ReactDOM.render(<StateProvider initialState={initialState} reducer={reducer}><App /></StateProvider>, document.getElementById('root'))
