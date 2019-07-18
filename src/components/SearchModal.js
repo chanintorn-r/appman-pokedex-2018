@@ -92,15 +92,6 @@ const SearchModal = () => {
           </SearchBox>
           </Flex>
           <CardList items={filteredCards} type="search" />
-          {/* <Flex flexDirection="column" flex={1} style={{overflowY: 'scroll'}}>
-            {
-              filteredCards.length > 0 ? filteredCards.map(item => {
-                return <CardItem btn="add" imgWidth={1/6} key={item.id} {...item}/>
-              })
-              :
-              <Text>No data</Text>
-            }
-          </Flex> */}
         </Flex>
       </BackDrop>
     </Wrapper>
